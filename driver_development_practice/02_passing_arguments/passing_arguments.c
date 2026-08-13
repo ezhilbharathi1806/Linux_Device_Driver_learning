@@ -1,6 +1,12 @@
 /*
 command to load driver
-sudo insmod hello_world_module.ko valueETX=14 nameETX="EmbeTronicX" arr_valueETX=100,102,104,106
+> sudo insmod passing_arguments.ko valueETX=14 nameETX="EmbeTronicX" arr_valueETX=100,102,104,106 cb_valueETX=25
+
+> echo 50 | sudo tee /sys/module/passing_arguments/parameters/cb_valueETX
+        Call back function called...
+        New value of cb_valueETX = 50
+> cat /sys/module/passing_arguments/parameters/cb_valueETX
+        50
 */
 #include<linux/kernel.h>
 #include<linux/init.h>
@@ -29,11 +35,14 @@ int notify_param(const char *val, const struct kernel_param *kp)
  
 const struct kernel_param_ops my_param_ops = 
 {
-        .set = &notify_param, // Use our setter ...
-        .get = &param_get_int, // .. and standard getter
+        .set = &notify_param, // Use our setter | When someone writes a new value to this parameter, call notify_param()
+        .get = &param_get_int, //standard getter| When someone reads the parameter, use the kernel's standard integer getter
 };
  
-module_param_cb(cb_valueETX, &my_param_ops, &cb_valueETX, S_IRUGO|S_IWUSR );
+module_param_cb(cb_valueETX,    //parameter name
+        &my_param_ops,          // what to do when SET/GET happens
+        &cb_valueETX,           //variable/storage location
+        S_IRUGO|S_IWUSR );
 /*-------------------------------------------------------------------------*/
 
 /*
