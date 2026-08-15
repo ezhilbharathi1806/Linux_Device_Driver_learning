@@ -1,4 +1,4 @@
-obj-m += driver
+obj-m += driver.o
  
 ifdef ARCH
 	#You can update your Beaglebone path here.
