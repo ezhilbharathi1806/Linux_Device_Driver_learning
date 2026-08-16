@@ -81,6 +81,12 @@ static ssize_t etx_read(struct file *filp, char __user *buf, size_t len, loff_t 
                 pr_err("Data Read : Err!\n");
         }
         pr_info("Data Read : Done!\n");
+
+        if (*off >= kernel_buffer_len){
+                return 0;       //EOF
+        }
+        *off += len;
+        
         return kernel_buffer_len;
 }
 
