@@ -1,0 +1,16 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			my_device_node: my-device@0 {
+				compatible = "vendor,my-custom-device";
+				reg = <0x0 0x40000000 0x1000>; /* Example memory resource */
+				my-integer-prop = <123>;
+				status = "okay";
+			};
+		};
+	};
+};
