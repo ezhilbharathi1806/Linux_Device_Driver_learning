@@ -1,13 +1,11 @@
-#include <linux/module.h>   /* module_init, module_exit, MODULE_* macros     */
-#include <linux/init.h>     /* __init, __exit                                */
-#include <linux/fs.h>       /* file_operations, register/alloc_chrdev_region */
-#include <linux/cdev.h>     /* cdev, cdev_init, cdev_add, cdev_del           */
+#include <linux/module.h>
+#include <linux/init.h>
+#include <linux/fs.h>
+#include <linux/cdev.h>
 
-static dev_t dev_nr;        /* holds assigned Major:Minor number             */
-static struct cdev my_cdev; /* kernel's internal char device structure       */
+static dev_t dev_nr;
+static struct cdev my_cdev;
 
-
-/* Called when user reads from the device — just logs and returns EOF */
 static ssize_t my_read(struct file *f, char __user *u, size_t l, loff_t *o)
 {
 	pr_info("hello_cdev - Read is called\n");
