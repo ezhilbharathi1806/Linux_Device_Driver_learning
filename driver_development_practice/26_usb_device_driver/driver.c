@@ -214,7 +214,7 @@ static struct usb_driver etx_usb_driver = {
 
 /* ── MODULE INIT / EXIT ───────────────────────────────────────────────────── */
 
-#if (IS_NEW_METHOD_USED == 0)
+#if (IS_NEW_METHOD_USED == 1)
 
 /*
  * NEW METHOD (kernel >= 3.3) — just ONE macro replaces everything below.
