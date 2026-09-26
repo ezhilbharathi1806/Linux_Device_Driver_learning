@@ -54,7 +54,7 @@ static struct usb_driver sample_usb_driver = {
 	.supports_autosuspend = 1,
 };
 
-#if (NEW_KERNEL == 0)
+#if (NEW_KERNEL == 1)
 module_usb_driver(sample_usb_driver);
 
 #else
