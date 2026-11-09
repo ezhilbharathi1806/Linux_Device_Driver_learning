@@ -1,0 +1,19 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2835"; /* Target architecture (e.g. Raspberry Pi) */
+
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            my_button {
+                compatible = "custom,gpio-button-interrupt";
+                status = "okay";
+
+                /* Maps this node to GPIO 23, active high */
+                button-gpios = <&gpio 23 0>;
+            };
+        };
+    };
+};

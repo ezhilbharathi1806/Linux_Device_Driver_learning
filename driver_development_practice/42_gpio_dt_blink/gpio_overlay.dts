@@ -1,0 +1,19 @@
+/dts-v1/;
+/plugin/;
+
+/{
+	compatible = "brcm,bcm2835"; /* Target architecture (e.g. Raspberry Pi) */
+
+	fragment@0{
+		target_path = "/";
+		__overlay__{
+			gpio_blink_node: gpio-blink@0 {
+				compatible = "cutom,gpio_blink_led";
+				led_gpio = <20>; /* GPIO pin number 20 for the LED */
+				Blink_period = <500>; /* Blink period in milliseconds */
+				status = "okay";
+			};
+		};
+
+	};
+};
